@@ -1,11 +1,11 @@
-Replace <<KUBE-MASTER-IP>>, <<KUBE-MINION-1-IP>>, <<KUBE-MINION-2-IP>>, <<KUBE-MINION-3-IP>> with appropriate hostname or IP address. Only /etc/hosts configuration needs a change if hostname is used.
+Replace KUBE-MASTER-IP, KUBE-MINION-1-IP, KUBE-MINION-2-IP, KUBE-MINION-3-IP with appropriate hostname or IP address. Only /etc/hosts configuration needs a change if hostname is used.
 
 Network-Setup
 
-Kube-Master : <<KUBE-MASTER-IP>>
-Kube-Minion-1 : <<KUBE-MINION-1-IP>>
-Kube-Minion-2 : <<KUBE-MINION-2-IP>>
-Kube-Minion-3 : <<KUBE-MINION-3-IP>>
+Kube-Master : KUBE-MASTER-IP
+Kube-Minion-1 : KUBE-MINION-1-IP
+Kube-Minion-2 : KUBE-MINION-2-IP
+Kube-Minion-3 : KUBE-MINION-3-IP
 
 
 On All Nodes
@@ -20,10 +20,10 @@ systemctl start ntpd
 systemctl enable ntpd
 
 vi /etc/hosts
-kube-master <<KUBE-MASTER-IP>>
-kube-minion-1 <<KUBE-MINION-1-IP>>
-kube-minion-2 <<KUBE-MINION-2-IP>>
-kube-minion-3 <<KUBE-MINION-3-IP>>
+kube-master KUBE-MASTER-IP
+kube-minion-1 KUBE-MINION-1-IP
+kube-minion-2 KUBE-MINION-2-IP
+kube-minion-3 KUBE-MINION-3-IP
 
 On Master
 ==========
@@ -62,10 +62,10 @@ On Minions
 yum -y install flannel kubernetes
 
 vi /etc/sysconfig/flanneld
-FLANNEL_ETCD="http://<<KUBE-MASTER-IP>>:2379"
+FLANNEL_ETCD="http://KUBE-MASTER-IP:2379"
 
 vi /etc/kubernetes/config
-KUBE_MASTER="--master=http://<<KUBE-MASTER-IP>>:8080"
+KUBE_MASTER="--master=http://KUBE-MASTER-IP:8080"
 
 
 on Minion 1
@@ -75,8 +75,8 @@ vi /etc/kubernetes/kubelet
 KUBELET_ADDRESS="--address=0.0.0.0"
 KUBELET_PORT="--port=10250"
 # change the hostname to this host’s IP address
-KUBELET_HOSTNAME="--hostname_override=<<KUBE-MINION-1-IP>>"
-KUBELET_API_SERVER="--api_servers=http://<<KUBE-MASTER-IP>>:8080"
+KUBELET_HOSTNAME="--hostname_override=KUBE-MINION-1-IP"
+KUBELET_API_SERVER="--api_servers=http://KUBE-MASTER-IP:8080"
 KUBELET_ARGS=""
 
 
@@ -87,8 +87,8 @@ vi /etc/kubernetes/kubelet
 KUBELET_ADDRESS="--address=0.0.0.0"
 KUBELET_PORT="--port=10250"
 # change the hostname to this host’s IP address
-KUBELET_HOSTNAME="--hostname_override=<<KUBE-MINION-2-IP>>"
-KUBELET_API_SERVER="--api_servers=http://<<KUBE-MASTER-IP>>:8080"
+KUBELET_HOSTNAME="--hostname_override=KUBE-MINION-2-IP"
+KUBELET_API_SERVER="--api_servers=http://KUBE-MASTER-IP:8080"
 KUBELET_ARGS=""
 
 on Minion 3
@@ -98,8 +98,8 @@ vi /etc/kubernetes/kubelet
 KUBELET_ADDRESS="--address=0.0.0.0"
 KUBELET_PORT="--port=10250"
 # change the hostname to this host’s IP address
-KUBELET_HOSTNAME="--hostname_override=<<KUBE-MINION-3-IP>>"
-KUBELET_API_SERVER="--api_servers=http://<<KUBE-MASTER-IP>>:8080"
+KUBELET_HOSTNAME="--hostname_override=KUBE-MINION-3-IP"
+KUBELET_API_SERVER="--api_servers=http://KUBE-MASTER-IP:8080"
 KUBELET_ARGS=""
 
 On All Minions
